@@ -1,0 +1,42 @@
+4
+<begin_topic>
+:id: 1
+:subject: CS12 Assignment 7
+:from: The
+:children:  3
+:body:  read the Tips & Tricks part for some help.
+Has anyone started already?
+<end>
+
+<begin_topic>
+:id: 2
+:subject: Your favorite TV show
+:from: So
+:body: 
+
+<begin_reply>
+:id: 3
+:subject: Re: Your favorite TV show
+:from: mike
+:body: Game of Thrones is an awesome show but there are too 
+many characters to remember.
+We even did not see half of the families and still at least 20 
+important characters are introduced already.
+Is there anyplace that I can read about the characters?
+<end>
+
+<begin_reply>
+:id: 4
+:subject: Re: Re: Your favorite TV show
+:from: Well
+:body: e script is written very loyal to the text.
+<end>
+
+<begin_reply>
+:id: 3
+:subject: CS12 Assignment 7
+:from: ali87
+:body: 
+why
+ohh
+<end>

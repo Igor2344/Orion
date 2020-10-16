@@ -1,0 +1,2 @@
+def sevenish(n)
+    
