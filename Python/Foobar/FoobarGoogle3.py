@@ -33,10 +33,20 @@ Created on Mon Oct 19 21:55:10 2020
     # right: n[x][y+1]
 
 def solution(n): #input is 2d list of coordinates
+    ncopy = n
+    minMove = mazeRun(ncopy)
+    for x in range(len(ncopy)):
+        for y in range(len(ncopy[0])):
+            if ncopy[x][y] == 1:
+                demolish([x,y], n)
+                if mazeRun(ncopy) < minMove:
+                    minMove = mazeRun(ncopy)
+    return minMove
+def mazeRun(n):
     z = [[0 for x in range(len(n))] for y in range(len(n[0]))]
     z[0][0] = 1
     move = 1
-    while(z[len(z)-1][len(z[0])-1] == 0): #while the endpoint has no path length (is 0)
+    while(z[len(z)-1][len(z[0])-1] == 0 and move < len(n) * len(n[0])): #while the endpoint has no path length (is 0)
         #write move to each adjacent non wall spot
         for x in range(len(z)):
             for y in range(len(z[0])):
@@ -51,7 +61,6 @@ def solution(n): #input is 2d list of coordinates
                         z[x][y+1] = move + 1
         move += 1
     return move
-    
 
 def demolish(coord, n): #replaces wall with empty space in 2d list n
     x = coord[0]
@@ -61,10 +70,11 @@ def demolish(coord, n): #replaces wall with empty space in 2d list n
 
 if __name__ == "__main__":
     n = [
-        [0, 1, 1, 0], 
-        [0, 0, 0, 1], 
-        [1, 1, 0, 0], 
-        [1, 1, 1, 0]
+        [0, 0, 0, 0, 0], 
+        [1, 1, 1, 1, 0], 
+        [0, 0, 0, 0, 0], 
+        [0, 1, 1, 1, 1],
+        [0, 0, 0, 0, 0]
         ]
     print(n)
     print(solution(n))
