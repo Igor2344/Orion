@@ -43,7 +43,7 @@ def solution(n): #input is 2d list of coordinates
                     minMove = mazeRun(ncopy)
     return minMove
 def mazeRun(n):
-    z = [[0 for x in range(len(n))] for y in range(len(n[0]))]
+    z = [[0 for x in range(len(n[0]))] for y in range(len(n))]
     z[0][0] = 1
     move = 1
     while(z[len(z)-1][len(z[0])-1] == 0 and move < len(n) * len(n[0])): #while the endpoint has no path length (is 0)
@@ -70,11 +70,8 @@ def demolish(coord, n): #replaces wall with empty space in 2d list n
 
 if __name__ == "__main__":
     n = [
-        [0, 0, 0, 0, 0], 
-        [1, 1, 1, 1, 0], 
-        [0, 0, 0, 0, 0], 
-        [0, 1, 1, 1, 1],
-        [0, 0, 0, 0, 0]
-        ]
+        [0, 1, 0]
+    ]
+
     print(n)
     print(solution(n))
