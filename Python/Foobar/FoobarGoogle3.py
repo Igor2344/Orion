@@ -14,7 +14,7 @@ Created on Mon Oct 19 21:55:10 2020
 #map always solvable, but may require removing wall
 
 #to solve maze:
-    #rewrite all adjacent steps from origion as +1 (unless its a wall)
+    #rewrite all adjacent steps from origin as +1 (unless its a wall)
     #keep adding outward in every direction
     #when a number is written to the finish spot, that is the optimal path length
         #does not consider needing wall replaced
@@ -33,15 +33,25 @@ Created on Mon Oct 19 21:55:10 2020
     # right: n[x][y+1]
 
 def solution(n): #input is 2d list of coordinates
-    ncopy = n
-    minMove = mazeRun(ncopy)
-    for x in range(len(ncopy)):
-        for y in range(len(ncopy[0])):
-            if ncopy[x][y] == 1:
-                demolish([x,y], n)
-                if mazeRun(ncopy) < minMove:
-                    minMove = mazeRun(ncopy)
+    ncopy = [[]]
+    ncopy = copyList(ncopy, n)
+    minMove = mazeRun(n)
+    for x in range(len(n)):
+        for y in range(len(n[0])):
+            if n[x][y] == 1:
+                n = copyList(n, ncopy)
+                n = demolish([x,y], n)
+                if mazeRun(n) < minMove:
+                    minMove = mazeRun(n)
     return minMove
+
+def copyList(a, b):
+    a = [[0 for x in range(len(b[0]))] for y in range(len(b))]
+    for x in range(len(b)):
+        for y in range(len(b[0])):
+            a[x][y] = b[x][y]
+    return a
+    
 def mazeRun(n):
     z = [[0 for x in range(len(n[0]))] for y in range(len(n))]
     z[0][0] = 1
@@ -69,9 +79,17 @@ def demolish(coord, n): #replaces wall with empty space in 2d list n
     return n
 
 if __name__ == "__main__":
+    #what if start or end is 1?
     n = [
-        [0, 1, 0]
+        [0, 1, 1, 1, 1, 1, 1, 0, 1, 1],
+        [0, 1, 1, 1, 1, 1, 1, 0, 1, 1],
+        [0, 0, 1, 1, 0, 0, 0, 0, 1, 1],
+        [1, 0, 1, 1, 0, 1, 1, 0, 0, 0],
+        [1, 0, 1, 1, 0, 1, 1, 0, 0, 1],
+        [1, 0, 1, 1, 0, 1, 1, 0, 0, 1],
+        [1, 0, 0, 0, 0, 1, 1, 0, 0, 1],
+        [1, 1, 1, 1, 1, 1, 1, 0, 1, 1],
+        [1, 1, 1, 1, 1, 1, 0, 0, 1, 1],
+        [1, 1, 1, 1, 1, 1, 1, 0, 0, 0]
     ]
-
-    print(n)
     print(solution(n))
