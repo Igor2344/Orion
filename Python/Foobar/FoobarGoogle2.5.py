@@ -75,7 +75,7 @@ def sortDe(n):
     return stri
     
 if __name__ == "__main__":
-    print(solution("1211", 10))
+    print(solution("210022", 3))
     # x = "210111"
     # for z in range(6):
     #     x = allgor(x, 3)
