@@ -19,45 +19,51 @@ If our time_limit is UNDER what we would gain at most from a move, the solution 
 """
 If there is a negative cycle, return list of all bunnies in order (we can save all of them)
 use bellman-ford algo to detect negative cycles & solve problem
+
+Question:
+Can there be a solution where the fastest path DOES NOT save the most bunnies? BFA would fail in this case
 """
 def solution(times, time_limit):
     buni = []
-    index = 0
-    for x in times[0]:
-        if x < 0:
-            index = x
-            
-    
+    edges = []
+    vertexes = []
+    for start in range(len(times)): #forms edges list & vertexes list for bfa
+        vertexes.append(start)
+        for end in range(len(times[0])):
+            if start != end: #makes sure not to include edges of same point start and end with weight 0
+                edges.append([start, end, times[start][end]])
+    for x in bfa(vertexes, edges):
+        
     return buni
 
 def bfa(vertexes, edges): # source is always at index 0
-    #edges are represented as a list of lists such as (1,2,w) meaning the edge path from vertex 1 to 2 with weight w
+    #edges are represented as a list of lists such as (vertex1,vertex2,weight) meaning the edge path from vertex 1 to 2 with weight w
 
-    #set all distances to infinity (idk how yet)
+    #set all distances to infinity (float('inf) - may cause comparison problems)
     #vertex relaxation must run vertexes-1 number of times
     #go thru all paths and check IF current path time is < previous path, then replace distance
     #after vertex-1 runs, run one more time, if any changes are made, there is a negative cycle
+    
     distance = []
-    predecesor = []
+    predecessor = []
     
     for v in vertexes:
-        distance[v] = #infinity
-        predecessor[v] = None
+        distance[v] = float('inf') #set as inf or a very big number
         
     distance[0] = 0
     
     #edge relaxation (vertexes-1 iterations)
-    for x in range(vertexes.len()-1):
+    for x in range(len(vertexes)-1): # y[0] = start y[1] = end y[2] = weight
         for y in edges:
             if distance[y[0]] + y[2] < distance[y[1]]:
                 distance[y[1]] = distance[y[0]] + y[2]
-                predecessor[y[1]] = y[0]
               
     #test for negative cycles after relaxation completion
     for y in edges:
             if distance[y[0]] + y[2] < distance[y[1]]:
                 #then we know there is a negative cycle
-    
+                return 
+    return 
     
 if __name__ == "__main__":
     times = [
@@ -65,6 +71,6 @@ if __name__ == "__main__":
         [9, 0, 2, 2, -1],  # 1 = Bunny 0
         [9, 3, 0, 2, -1],  # 2 = Bunny 1
         [9, 3, 2, 0, -1],  # 3 = Bunny 2
-        [9, 3, 2, 2,  0]  # 4 = Bulkhead
+        [9, 3, 2, 2,  0]   # 4 = Bulkhead
         ]
     
