@@ -41,17 +41,12 @@ def solution(times, time_limit):
         a = []
     return buni
 
-def brute(times, pos, steps, timer, visited):
-    #check if timer is already too low
-    if timer < -1:
-        return
-    visited[pos] = timer
-    for x in len(times):
-        if x != pos and visited[x] == -2 and timer - times[pos][x] > -2:
-            if x != 0 and x != len(times) - 1:#if we move to a bunny room
-                brute(times, x, steps + 1, timer - times[pos][x], visited)
-            else:
-                brute(times, x, steps)
+def brute(times, timer):
+    #generate all possible paths
+    paths[]
+    #all paths should start with 0 and end at bulkhead
+    for x in range(len(times)):
+        
 
 def bfa(vertexes, edges): # source is always at index 0
     #edges are represented as a list of lists such as (vertex1,vertex2,weight)
