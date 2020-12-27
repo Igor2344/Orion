@@ -15,8 +15,12 @@ def isSorted(tlist): #checks if each preceding value in a list is less, if so, l
     return True
 
 def decimate(alist):
-    while !isSorted(alist) or len(alist) == 1:
+    while isSorted(alist) == False or len(alist) == 1:
         #remove every other value in a list
-        for x in range(len(alist)):
-            alist.remove(alist[x])
-            x+=1
+        alist.remove(alist[len(alist)//2])
+            
+if __name__ == "__main__":
+    ourlist = [1,2,5,4,5]
+    decimate(ourlist)
+    print(ourlist)
+    
